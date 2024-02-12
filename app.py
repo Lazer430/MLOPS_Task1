@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 # Create a Flask app
 app = Flask(__name__)
@@ -7,6 +7,35 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     return render_template('index.html')
+
+# Define a route to handle the calculation
+@app.route('/calculate', methods=['POST'])
+def calculate():
+    operand1 = float(request.form['operand1'])
+    operator = request.form['operator']
+    operand2 = float(request.form['operand2'])
+
+    result = None
+    error_message = None
+
+    try:
+        if operator == '+':
+            # result = add(operand1, operand2)
+        elif operator == '*':
+            # result = mult(operand1, operand2)
+        elif operator == '-':
+            # result = sub(operand1, operand2)
+        elif operator == '/':
+            if operand2 != 0:
+                # result = div(operand1, operand2)
+            else:
+                error_message = 'Error: Division by zero'
+        else:
+            error_message = 'Error: Invalid operator'
+    except Exception as e:
+        error_message = f'Error: {str(e)}'
+
+    return render_template('index.html', result=result, error_message=error_message)
 
 # Run the app
 if __name__ == '__main__':
