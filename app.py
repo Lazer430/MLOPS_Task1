@@ -8,6 +8,19 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
+# Define functions for add and multiply operations
+def add(operand1, operand2):
+    return operand1 + operand2
+
+def multiply(operand1, operand2):
+    return operand1 * operand2
+
+def sub(operand1, operand2):
+    return operand1 - operand2
+
+def div(operand1, operand2):
+    return operand1 / operand2
+
 # Define a route to handle the calculation
 @app.route('/calculate', methods=['POST'])
 def calculate():
@@ -20,14 +33,16 @@ def calculate():
 
     try:
         if operator == '+':
-            # result = add(operand1, operand2)
+            result = add(operand1, operand2)
         elif operator == '*':
-            # result = mult(operand1, operand2)
+            result = multiply(operand1, operand2)
         elif operator == '-':
-            # result = sub(operand1, operand2)
+            # For subtraction, you can implement a sub function if needed
+            result = sub(operand1, operand2)
         elif operator == '/':
             if operand2 != 0:
-                # result = div(operand1, operand2)
+                # For division, you can implement a div function if needed
+                result = div(operand1, operand2)
             else:
                 error_message = 'Error: Division by zero'
         else:
